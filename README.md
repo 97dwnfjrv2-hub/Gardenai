@@ -1,6 +1,18 @@
 # GardenAI Cultivation Intelligence
 
-A React/Vite dashboard prototype for a professional coco crop-steering workflow.
+A React/Vite local MVP for a professional coco crop-steering workflow.
+
+## What you can use now
+
+- Overview dashboard for environment, dryback, runoff EC, and lighting
+- Assistant surface with confidence, uncertainty, and data-quality checks
+- Grow log with add/delete observations
+- Irrigation program with add/delete events and validation
+- Manual measurements with add/delete records, summaries, and alerts
+- Weekly summary view
+- Run comparison analytics
+- Backup export / restore for local data
+- Local persistence in the browser so entered records survive reloads
 
 ## Run locally
 
@@ -11,28 +23,28 @@ npm.cmd run dev
 
 Then open the local URL printed by Vite.
 
-## What is included
+## Current limitation
 
-- Professional dark-mode dashboard
-- Mock environmental telemetry
-- Crop steering interpretation engine
-- Uncertainty-aware AI assistant surface
-- Lighting calculations based on active canopy area
-- Daily grow log and run comparison
-- Responsive layouts for desktop, tablet, and mobile
+This is a usable local MVP, not yet the final cloud product. It stores data in the browser, not a hosted database, and it does not yet connect to live controllers or sensors.
 
 ## Architecture
 
-- `src/data/profile.js` — real grow profile and evidence model
-- `src/data/telemetry.js` — mock live telemetry, logs, run history
-- `src/lib/cropSteering.js` — calculations and rule evaluation
-- `src/lib/assistantEngine.js` — uncertainty-aware assistant logic
-- `src/App.jsx` — dashboard composition
+- `src/data/profile.js` — physical grow profile and evidence sources
+- `src/data/cultivation.js` — normalized run, plant, irrigation, and observation models
+- `src/data/measurements.js` — seeded manual measurements
+- `src/data/domain.js` — strategy profiles, integration roadmap, recommendation prerequisites
+- `src/lib/cropSteering.js` — environmental and steering calculations
+- `src/lib/assistantEngine.js` — confidence-aware assistant logic
+- `src/lib/dataQuality.js` — input quality scoring
+- `src/lib/analytics.js` — weekly summary and run comparison analytics
+- `src/lib/summaries.js` — measurement summaries and alerts
+- `src/lib/validation.js` — form validation
+- `src/views/*` — product surfaces
+- `src/components/*` — reusable UI building blocks
 
-## Next production steps
+## Next production phase
 
-1. Add a real database and run history model
-2. Add authenticated user/profile management
-3. Add ingestion adapters for Trolmaster, Home Assistant, AROYA, and manual CSV imports
-4. Replace mock assistant rules with a retrieval-backed evidence layer and explicit source citations
-5. Add PPFD mapping workflow, irrigation event editor, and image upload storage
+1. Move records from browser-local storage into a backend database and API
+2. Add user auth, photos, and stronger date-aware history
+3. Add retrieval-backed evidence with citations for recommendations
+4. Add live integrations for Home Assistant, TrolMaster, and AROYA when credentials are available
