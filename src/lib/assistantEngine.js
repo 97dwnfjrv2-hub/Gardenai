@@ -1,4 +1,4 @@
-export function buildAssistantReport({ activeSetup, drybackPct, runoffEcDelta, vpd, ppfdMapped, runoffTrendPoints }) {
+export function buildAssistantReport({ activeSetup, drybackPct, runoffEcDelta, vpd, ppfdMapped, runoffTrendPoints, phaseProfile, strategyProfile, totalDailyIrrigationMl }) {
   const missing = []
   if (!activeSetup) missing.push('active pot setup')
   if (drybackPct == null) missing.push('overnight dryback endpoints')
@@ -13,6 +13,12 @@ export function buildAssistantReport({ activeSetup, drybackPct, runoffEcDelta, v
     vpd > 1.5
       ? 'Current VPD is on the more generative side of the operating range.'
       : 'Current VPD is not unusually aggressive from the present sample.',
+    phaseProfile && strategyProfile
+      ? `${phaseProfile.label} is being managed against a ${strategyProfile.name.toLowerCase()} reference profile.`
+      : 'Phase or steering strategy context is incomplete.',
+    totalDailyIrrigationMl != null
+      ? `Current programmed irrigation totals ${totalDailyIrrigationMl} mL/day across the active crop.`
+      : 'Total daily irrigation volume is not yet established.',
   ]
 
   const confidence = missing.length === 0 ? 'High' : missing.length <= 2 ? 'Medium' : 'Low'
